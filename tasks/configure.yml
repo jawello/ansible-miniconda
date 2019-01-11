@@ -14,7 +14,6 @@
     dest: "{{ miniconda_rcfile }}"
     line: export PATH="{{ miniconda_home }}/bin:$PATH"
     state: present
-  when: miniconda_modify_path
 
 #- name: create environments
 #  sudo: no
