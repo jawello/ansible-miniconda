@@ -7,7 +7,7 @@
   changed_when: bin_conda.stat.exists == False
 
 - name: download miniconda installer
-  sudo: no
+  become: no
   get_url:
     url={{ miniconda_url }}
     dest=/tmp/miniconda.sh
@@ -16,10 +16,10 @@
   when: bin_conda.stat.exists == False
 
 - name: install miniconda
-  sudo: no
+  become: no
   shell: "/tmp/miniconda.sh -b -p {{ miniconda_home }} creates={{ miniconda_home }} executable=/bin/bash"
   register: miniconda_installed
-  when: miniconda_downloaded | success
+  when: miniconda_downloaded is success
   notify:
     - remove miniconda setup script
     - update conda to latest version
